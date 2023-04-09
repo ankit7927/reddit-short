@@ -10,7 +10,7 @@ webdriver_opt = """
 1. chrome
 2. firefox
 3. edge
-choose browser => """
+choose browser : """
 img_path = "raw/images/"
 audio_path = "raw/audios/"
 background_path = "backs/"
@@ -22,11 +22,19 @@ class Main:
 
     def __init__(self) -> None:
         inp = input(webdriver_opt)
-        self.page_link = input("enter page link => ")
+        self.page_link = input("enter page link : ")
 
         if self.page_link == "":
             raise Exception("page link is required ...")
         
+        try:
+            os.mkdir(img_path)
+            os.mkdir(audio_path)
+            os.mkdir("raw/clips")
+            os.mkdir("output")
+        except:
+            pass
+
         self.dataExtractor = DataExtractor(inp)
         mainData:dict = self.dataExtractor.extractData(self.page_link)
 
